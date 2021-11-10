@@ -7,7 +7,11 @@ const main = async () => {
         "https://upload.wikimedia.org/wikipedia/en/7/72/Raphael_%28Teenage_Mutant_Ninja_Tutles%29.jpg",
         "https://upload.wikimedia.org/wikipedia/en/5/5a/Donatello_%28Teenage_Mutant_Ninja_Turtles%29.jpg"],
         [300, 300, 300, 300],                    // HP values
-        [125, 150, 175, 150]                       // Attack damage values
+        [125, 150, 175, 150],                       // Attack damage values
+        "Shredder",
+        "https://upload.wikimedia.org/wikipedia/en/6/62/TMNTShredderComic.jpg",
+        10000,
+        50,
       );
     await gameContract.deployed();
     console.log("Contract deployed to:", gameContract.address);
@@ -15,8 +19,11 @@ const main = async () => {
     txn = await gameContract.mintCharacterNFT(3);
     await txn.wait();
 
-    let returnedTokenURI = await gameContract.tokenURI(1);
-    console.log("Token URI: ", returnedTokenURI);
+    // let returnedTokenURI = await gameContract.tokenURI(1);
+    // console.log("Token URI: ", returnedTokenURI);
+
+    txn = await gameContract.attackBoss();
+    await txn.wait(); 
   };
   
   const runMain = async () => {
